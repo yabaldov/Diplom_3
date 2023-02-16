@@ -34,17 +34,14 @@ public class RegisterHelper {
     }
 
     @Step("Удалить созданного ранее пользователя через API")
-    public ValidatableResponse deleteUser() {
-        return given()
-                .spec(getSpec()
-                        .auth()
-                        .oauth2(userAccessToken)
-                )
+    public void deleteUser() {
+       given().spec(getSpec().auth().oauth2(userAccessToken))
                 .when()
                 .delete(USER_DELETE_PATH)
                 .then();
     }
 
+    @Step("Выполнить логин пользователя через API")
     public boolean loginUser(UserCredentials credentials) {
         ValidatableResponse response = given()
                 .spec(getSpec())
@@ -52,7 +49,6 @@ public class RegisterHelper {
                 .when()
                 .post(USER_LOGIN_PATH)
                 .then();
-
         boolean isUserLoggedIn = response.extract().statusCode() == SC_OK;
         if (isUserLoggedIn) {
             userAccessToken = response
