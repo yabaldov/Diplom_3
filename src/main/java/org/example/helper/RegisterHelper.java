@@ -15,7 +15,7 @@ public class RegisterHelper {
     private static final String BASE_URI = "https://stellarburgers.nomoreparties.site/";
     private static final String USER_REGISTER_PATH = "/api/auth/register";
     private static final String USER_DELETE_PATH = "/api/auth/user";
-
+    private static final String USER_LOGIN_PATH = "/api/auth/login";
 
     private String userAccessToken;
 
@@ -43,6 +43,25 @@ public class RegisterHelper {
                 .when()
                 .delete(USER_DELETE_PATH)
                 .then();
+    }
+
+    public boolean loginUser(UserCredentials credentials) {
+        ValidatableResponse response = given()
+                .spec(getSpec())
+                .body(credentials)
+                .when()
+                .post(USER_LOGIN_PATH)
+                .then();
+
+        boolean isUserLoggedIn = response.extract().statusCode() == SC_OK;
+        if (isUserLoggedIn) {
+            userAccessToken = response
+                    .extract()
+                    .path("accessToken")
+                    .toString()
+                    .replace("Bearer ", "");
+        }
+        return isUserLoggedIn;
     }
 
     private RequestSpecification getSpec() {
