@@ -55,4 +55,30 @@ public class BuilderNavigationTest {
         isBunsSectionCurrent = mainPage.clickBuilderBunsMenuTab().isBunsCurrentMenuSection();
         assertThat("При клике по табе \"Булки\" текущим должен стать раздел с булками", isBunsSectionCurrent, is(true) );
     }
+
+    @Test
+    @DisplayName("Should Scroll to a Section And Switch Builder Tabs")
+    @Description("Проверка перехода к разделам конструктора при помощи прокручивания ленты меню")
+    public void shouldScrollAndSwitchBuilderTabs() {
+        MainPage mainPage = new MainPage(rule.getDriver())
+                .open();
+
+        boolean isBunsSectionCurrent = mainPage.isBunsCurrentMenuSection();
+        assertThat("При открытии конструктора текущим должен быть раздел с булками", isBunsSectionCurrent, is(true) );
+
+        boolean isSaucesSectionCurrent = mainPage
+                .scrollToSaucesBuilderSection()
+                .isSaucesCurrentMenuSection();
+        assertThat("При прокрутке до заголовка \"Соусы\" текущим должен стать раздел с соусами ", isSaucesSectionCurrent, is(true) );
+
+        boolean isFillingsSectionCurrent = mainPage
+                .scrollToFillingsBuilderSection()
+                .isFillingsCurrentMenuSection();
+        assertThat("При прокрутке до заголовка \"Начинки\" текущим должен стать раздел с начинками", isFillingsSectionCurrent, is(true) );
+
+        isBunsSectionCurrent = mainPage
+                .scrollToBunsBuilderSection()
+                .isBunsCurrentMenuSection();
+        assertThat("При прокрутке до заголовка \"Булки\" текущим должен стать раздел с булками", isBunsSectionCurrent, is(true) );
+    }
 }

@@ -3,6 +3,7 @@ package org.example.pageobjects;
 import io.qameta.allure.Step;
 import lombok.Getter;
 import org.example.pageobjects.base.PageBase;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -141,5 +142,28 @@ public class MainPage extends PageBase {
                 menuTab.getAttribute("class").contains("current") &&
                 menuHeader.isDisplayed()
         );
+    }
+
+
+    @Step("Прокрутить меню конструктора до раздела булок")
+    public MainPage scrollToBunsBuilderSection() {
+        ((JavascriptExecutor)driver)
+                .executeScript("arguments[0].scrollIntoView();", builderBunsMenuHeader);
+        return this;
+    }
+
+
+    @Step("Прокрутить меню конструктора до раздела соусов")
+    public MainPage scrollToSaucesBuilderSection() {
+        ((JavascriptExecutor)driver)
+                .executeScript("arguments[0].scrollIntoView();", builderSaucesMenuHeader);
+        return this;
+    }
+
+    @Step("Прокрутить меню конструктора до раздела начинок")
+    public MainPage scrollToFillingsBuilderSection() {
+        ((JavascriptExecutor)driver)
+                .executeScript("arguments[0].scrollIntoView();", builderFillingsMenuHeader);
+        return this;
     }
 }
