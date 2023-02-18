@@ -144,14 +144,12 @@ public class MainPage extends PageBase {
         );
     }
 
-
     @Step("Прокрутить меню конструктора до раздела булок")
     public MainPage scrollToBunsBuilderSection() {
         ((JavascriptExecutor)driver)
                 .executeScript("arguments[0].scrollIntoView();", builderBunsMenuHeader);
         return this;
     }
-
 
     @Step("Прокрутить меню конструктора до раздела соусов")
     public MainPage scrollToSaucesBuilderSection() {

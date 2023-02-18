@@ -7,10 +7,8 @@ import org.junit.rules.ExternalResource;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
-
 import static java.lang.System.getProperties;
 import static java.lang.System.getenv;
-
 
 public class WebDriverRule extends ExternalResource {
 
