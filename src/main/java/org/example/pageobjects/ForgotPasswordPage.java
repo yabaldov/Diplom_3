@@ -24,7 +24,6 @@ public class ForgotPasswordPage extends PageBase {
         PageFactory.initElements(driver, this);
     }
 
-
     @Step("Открытие страницы восстановления пароля")
     public ForgotPasswordPage open() {
         driver.get(FORGOT_PASSWORD_PAGE_URL);
